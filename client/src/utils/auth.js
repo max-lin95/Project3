@@ -1,39 +1,28 @@
-// import decode from 'jwt-decode';
+import { createContext, useReducer } from "react";
 
-// class AuthService {
-//   getProfile() {
-//     return decode(this.getToken());
-//   }
+export const AuthContext = createContext()
 
-//   loggedIn() {
-//     const token = this.getToken();
-//     return !!token && !this.isTokenExpired(token); 
-//   }
+export const authReducer = (state, action) => {
+    switch (action.type) {
+        case 'LOGIN':
+            return {user: action.payload}
+        case 'LOGOUT':
+            return {user: null}
+        default:
+            return state
+    }
+}
 
-//   isTokenExpired(token) {
-//     try {
-//       const decoded = decode(token);
-//       if (decoded.exp < Date.now() / 1000) {
-//         return true;
-//       } else return false;
-//     } catch (err) {
-//       return false;
-//     }
-//   }
+export const AuthContextProvider = ({children}) => {
+    const [state, dispatch] = useReducer(authReducer, {
+        user: null
+    })
 
-//   getToken() {
-//     return localStorage.getItem('id_token');
-//   }
+    console.log('AuthContext state: ', state)
 
-//   login(idToken) {
-//     localStorage.setItem('id_token', idToken);
-//     window.location.assign('/');
-//   }
-
-//   logout() {
-//     localStorage.removeItem('id_token');
-//     window.location.assign('/');
-//   }
-// }
-
-// export default new AuthService();
+    return (
+        <AuthContext.Provider value={{...state, dispatch}}>
+            {children}
+        </AuthContext.Provider>
+    )
+}

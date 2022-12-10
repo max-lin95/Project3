@@ -1,17 +1,21 @@
 import React from "react";
+import {Link} from 'react-router-dom';
 
 const Nav = () => {
     return(
-<>
-<div className="ui top fixed menu">
-  <div className="item">
-    <img src="/images/logo.png"/>
-  </div>
-  <a className="item">Features</a>
-  <a className="item">Testimonials</a>
-  <a className="item">Sign-in</a>
-</div>
-</>
+<header>
+    <div className='container'>
+        <Link to='/'>
+            <h1>Hello</h1>
+        </Link>
+        <nav>
+            <div>
+                <Link to='/login'>Login</Link>
+                <Link to='/signup'>Sign Up </Link>
+            </div>
+        </nav>
+    </div>
+</header>
 
     );
 }
