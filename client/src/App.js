@@ -1,37 +1,27 @@
-import React from "react";
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import React from 'react';
 import './App.css';
-import Login from "./components/Login";
-import SignUp from './components/SignUp';
-import Nav from "./components/Nav";
+
+//Import components
+import LoginForm from './components/LoginForm'
+import Nav from './components/Nav'
+import Home from './components/Home'
+import ProductDescription from './components/ProductDescription'
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
-   <div className="App">
-    <BrowserRouter>
-      <Nav />
-      <div className="pages">
-        <Routes>
-          <Route
-          path='/'
-          element={<Nav />}
-          />
-          <Route
-          path='/login'
-          element={<Login />}
-          />
-          <Route
-          path='/signup'
-          element={<SignUp />}
-          />
-        </Routes>
-      </div>
-    </BrowserRouter>
-   </div>
-
-  
-  )
+    <Router>
+    <div className='App'>
+      <Nav/>
+      <Routes>
+        <Route path="/" exact element={<Home/>} />
+        <Route path="/product-description" element={<ProductDescription/>} />
+        <Route path="/login-form" element={<LoginForm/>} />
+      </Routes>
+    </div>
+    </Router>
+  );
 }
-
-
+  
 export default App;
